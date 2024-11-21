@@ -52,7 +52,8 @@ export const enum EventType {
   Click = 'click',
   HashChange = 'hash_change',
   Http = 'http',
-  Resource = 'resource'
+  Resource = 'resource',
+  BeforeUnload = 'before_unload',
 }
 
 export interface IEventParams {

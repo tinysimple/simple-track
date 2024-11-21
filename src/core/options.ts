@@ -80,6 +80,7 @@ export class Options {
       whitescreen,
       hashchange,
       history,
+      beforeunload,
       performance,
       // recordScreen,
     } = this.getSwitchs();
@@ -89,6 +90,7 @@ export class Options {
     this.switchMap[EventType.WhiteScreen] = whitescreen;
     this.switchMap[EventType.HashChange] = hashchange;
     this.switchMap[EventType.History] = history;
+    this.switchMap[EventType.BeforeUnload] = beforeunload;
     this.switchMap[EventType.Performance] = performance;
   }
 
@@ -116,6 +118,7 @@ export class Options {
       whitescreen = false,
       hashchange = false,
       history = false,
+      beforeunload = true,
       recordScreen = false,
       performance = false,
     } = switchs;
@@ -127,6 +130,7 @@ export class Options {
       whitescreen,
       hashchange,
       history,
+      beforeunload,
       recordScreen,
       performance,
     };

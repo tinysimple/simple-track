@@ -63,6 +63,19 @@ const historyCallback = () => {
   };
 };
 
+const beforeUnloadCallback = () => {
+  eventTrack.reportAll([
+    {
+      type: EventType.BeforeUnload,
+      data: {
+        url: window.location.href
+      },
+      status: StatusType.Ok,
+      time: getTimestamp(),
+    }
+  ]);
+};
+
 const EventCollection = {
   [EventType.Click]: (e: PointerEvent) => {
     const globalClickListeners = options.getGlobalClickListeners();
@@ -70,7 +83,7 @@ const EventCollection = {
     if (!el) return;
 
     if (globalClickListeners.length) {
-      globalClickListeners.forEach(({ selector, elementText, data = '' }) => {
+      globalClickListeners.forEach(({ selector, elementText, data = '', handler }) => {
         if (selector) {
           const els = document.querySelectorAll(selector);
           const isIncludes = [...(els as unknown as any[])].includes(el);
@@ -78,7 +91,7 @@ const EventCollection = {
             eventTrack.add({
               type: EventType.Click,
               data: {
-                source: data,
+                source: typeof handler === 'function' ? handler.call(null, el.cloneNode?.(true) || el) : data,
                 elStr: htmlElementAsString(el),
               },
               status: StatusType.Ok,
@@ -88,7 +101,7 @@ const EventCollection = {
           eventTrack.add({
             type: EventType.Click,
             data: {
-              source: data,
+              source: typeof handler === 'function' ? handler.call(null, el.cloneNode?.(true) || el) : data,
               elStr: htmlElementAsString(el),
             },
             status: StatusType.Ok,
@@ -114,6 +127,7 @@ const EventCollection = {
   },
   [EventType.HashChange]: hashCallback(),
   [EventType.History]: historyCallback(),
+  [EventType.BeforeUnload]: beforeUnloadCallback,
   [EventType.WhiteScreen]: () => {
     const { whiteBoxElements, skeletonProject } = options.get();
     openWhiteScreen(

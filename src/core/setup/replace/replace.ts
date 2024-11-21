@@ -33,6 +33,17 @@ const listenWindowClick = () => {
   });
 };
 
+const listenPageBeforeUnload = () => {
+  on({
+    el: _global,
+    eventName: 'beforeunload',
+    event: throttle(function (e: PointerEvent) {
+      emit(EventType.BeforeUnload, e);
+    }, 300),
+    capture: true,
+  });
+};
+
 const listenHashChange = () => {
   on({
     el: _global,
@@ -224,6 +235,9 @@ const listenOrReplace = (type: EventType) => {
       break;
     case EventType.WhiteScreen:
       whiteScreen();
+      break;
+    case EventType.BeforeUnload:
+      listenPageBeforeUnload();
       break;
   }
 };

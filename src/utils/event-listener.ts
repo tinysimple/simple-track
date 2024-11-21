@@ -1,6 +1,7 @@
 import { isElement, isFunction, isNil } from 'lodash-es';
 
 export const NATIVE_EVENTS = [
+  'beforeunload',
   'click',
   'dblclick',
   'keydown',

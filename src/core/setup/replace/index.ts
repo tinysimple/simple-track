@@ -52,6 +52,11 @@ export const setupReplace = () => {
       type: EventType.WhiteScreen,
       callback: EventCollection[EventType.WhiteScreen],
     });
+  siwtchMap[EventType.BeforeUnload] &&
+    addListenOrReplace({
+      type: EventType.BeforeUnload,
+      callback: EventCollection[EventType.BeforeUnload],
+    });
   if (siwtchMap[EventType.Performance]) {
     new WebPerformance({ report })
   }

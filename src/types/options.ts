@@ -19,6 +19,7 @@ export interface IGlobalClickListenerItem {
   selector?: string;
   elementText?: string;
   data?: string;
+  handler?: (el: Element | Node) => any;
 }
 
 export type UserIdType = string | (() => string);
@@ -30,6 +31,7 @@ export interface ISwitch {
   whitescreen: boolean;
   hashchange: boolean;
   history: boolean;
+  beforeunload: boolean;
   recordScreen: boolean;
   performance: boolean;
 }

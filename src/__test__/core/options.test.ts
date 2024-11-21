@@ -62,6 +62,7 @@ describe('core -> options.ts', () => {
       fetch: false,
       hashchange: false,
       history: false,
+      beforeunload: true,
       performance: false,
       recordScreen: false,
       whitescreen: false,
@@ -78,6 +79,7 @@ describe('core -> options.ts', () => {
       fetch: false,
       hashchange: false,
       history: true,
+      beforeunload: true,
       performance: false,
       recordScreen: false,
       whitescreen: false,
@@ -139,6 +141,19 @@ describe('core -> options.ts', () => {
         data: 'SUNSHINE',
       },
     ]);
+
+    const globalWithHandlerListener = {
+      selector: '.sunshine-test-class',
+      elementText: 'SUNSHINE_TEST_TEXT',
+      data: 'SUNSHINE',
+      handler: (ele: Node) => {
+        return ele.nodeName;
+      }
+    };
+    options.set({
+      globalClickListeners: [globalWithHandlerListener]
+    });
+    expect(options.getGlobalClickListeners()).toEqual([globalWithHandlerListener]);
   });
 
   it('Options report', () => {

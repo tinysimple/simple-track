@@ -76,6 +76,16 @@ export class EventTrack {
     await this.clearReportData();
     report.send(data, () => this.clearReportData());
   }
+
+  async reportAll(data: IEventParams[]) {
+    const list = this.data;
+    if (!data.length && !list.length) {
+      return;
+    }
+    const finalList = [...list, ...data];
+    await this.clearReportData();
+    report.send(finalList, () => this.clearReportData());
+  }
 }
 
 const eventTrack = new EventTrack();
