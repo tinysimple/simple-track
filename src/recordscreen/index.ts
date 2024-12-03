@@ -4,9 +4,7 @@ import { handleScreen } from './recordscreen';
 export default class RecordScreen {
   type!: string;
   recordScreentime = 10; // 默认录屏时长
-  recordScreenTypeList: string[] = [
-    'error'
-  ]; // 录屏事件集合
+  recordScreenTypeList: string[] = ['error']; // 录屏事件集合
   // constructor(params = {}) {
   // }
   // setOptions(params: any) {

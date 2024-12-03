@@ -68,11 +68,11 @@ const beforeUnloadCallback = () => {
     {
       type: EventType.BeforeUnload,
       data: {
-        url: window.location.href
+        url: window.location.href,
       },
       status: StatusType.Ok,
       time: getTimestamp(),
-    }
+    },
   ]);
 };
 
@@ -91,7 +91,10 @@ const EventCollection = {
             eventTrack.add({
               type: EventType.Click,
               data: {
-                source: typeof handler === 'function' ? handler.call(null, el.cloneNode?.(true) || el) : data,
+                source:
+                  typeof handler === 'function'
+                    ? handler.call(null, el.cloneNode?.(true) || el)
+                    : data,
                 elStr: htmlElementAsString(el),
               },
               status: StatusType.Ok,
@@ -101,7 +104,10 @@ const EventCollection = {
           eventTrack.add({
             type: EventType.Click,
             data: {
-              source: typeof handler === 'function' ? handler.call(null, el.cloneNode?.(true) || el) : data,
+              source:
+                typeof handler === 'function'
+                  ? handler.call(null, el.cloneNode?.(true) || el)
+                  : data,
               elStr: htmlElementAsString(el),
             },
             status: StatusType.Ok,

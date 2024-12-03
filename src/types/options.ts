@@ -5,7 +5,7 @@ type ICustomReport = (data: IReportParams[]) => any;
 
 // type ReportType = 'poll' | 'realtime';
 export interface IReportOptions {
-  headers?: Object | (() => Object);
+  headers?: object | (() => object);
   url: string;
   reportType?: 'img' | 'http' | 'beacon';
   format?: (data: any[]) => any;

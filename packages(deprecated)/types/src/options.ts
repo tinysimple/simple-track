@@ -1,14 +1,14 @@
 import { EventType, IReportParams } from './event';
 
-type ICustomReport = (data: IReportParams[]) => any
+type ICustomReport = (data: IReportParams[]) => any;
 
 // type ReportType = 'poll' | 'realtime';
 export interface IReportOptions {
   headers?: any;
   url: string;
-  reportType?: 'img' | 'http' | 'beacon'
+  reportType?: 'img' | 'http' | 'beacon';
   format?: (data: any[]) => any;
-  customReport?: ICustomReport
+  customReport?: ICustomReport;
 }
 
 export type CacheType = 'normal' | 'storage' | 'db';
@@ -45,7 +45,7 @@ export interface IOptions {
   switchs?: Partial<ISwitch>;
   maxEvents?: number;
   checkHttpStatus?: (data: any) => boolean;
-  filterHttpUrl?: (url: string, method: string) => boolean
+  filterHttpUrl?: (url: string, method: string) => boolean;
 }
 
 export type PartialOptions = Partial<IOptions>;

@@ -7,7 +7,7 @@ import type {
   SwitchMap,
 } from '@sunshine-track/types';
 import { PropType, EventType } from '@sunshine-track/types';
-import { merge, isArray, uniqBy } from 'lodash-es'
+import { merge, isArray, uniqBy } from 'lodash-es';
 import eventTrack from './event/event';
 import report from './report';
 
@@ -17,7 +17,7 @@ const getInitOptions = (): IOptions => ({
   report: {
     url: '',
     headers: {},
-    reportType: 'http'
+    reportType: 'http',
   },
   log: false,
   cacheType: 'normal',
@@ -165,10 +165,10 @@ export const setupOptions = (o: IOptions) => {
   eventTrack.setOptions({
     cacheType,
     projectKey,
-    maxEvents
+    maxEvents,
   });
   report.setOptions(reportOptions);
-  setLogFlag(log)
+  setLogFlag(log);
 };
 
 export default options;

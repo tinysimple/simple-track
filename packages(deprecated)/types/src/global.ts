@@ -15,7 +15,7 @@ export interface ISunshineTrack {
   _loopTimer: any;
   report: any;
   hasError: boolean;
-  recordScreenId: any
+  recordScreenId: any;
 }
 
 export interface Global extends Window {

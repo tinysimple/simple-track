@@ -2,7 +2,7 @@ import { HttpData, EventType } from '../../../types';
 import { addListenOrReplace } from './replace';
 import EventCollection from '../../event';
 import options from '../../options';
-import WebPerformance from '../../../performance'
+import WebPerformance from '../../../performance';
 import report from '../../report';
 
 export const setupReplace = () => {
@@ -58,6 +58,6 @@ export const setupReplace = () => {
       callback: EventCollection[EventType.BeforeUnload],
     });
   if (siwtchMap[EventType.Performance]) {
-    new WebPerformance({ report })
+    new WebPerformance({ report });
   }
 };

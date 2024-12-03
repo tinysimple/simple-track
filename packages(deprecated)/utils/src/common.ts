@@ -7,10 +7,10 @@ export const getTimestamp = () => Date.now();
 export const getHref = () => _global.location.href;
 
 // 获取当前域名
-export const getCurrentDomain = () => window.location.host
+export const getCurrentDomain = () => window.location.host;
 
 // 获取当前页面路径
-export const getCurrentHref = () => window.location.href
+export const getCurrentHref = () => window.location.href;
 
 // 获取uuid
 export const getUUID = (): string => {
@@ -21,10 +21,10 @@ export const getUUID = (): string => {
     return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
   return uuid;
-}
+};
 
 // 获取user-agent
-export const getUserAgent = () => navigator.userAgent
+export const getUserAgent = () => navigator.userAgent;
 
 export function htmlElementAsString(target: HTMLElement): string {
   const tagName = target.tagName.toLowerCase();
@@ -65,4 +65,3 @@ export const parseUrlToObj = (url: string) => {
     relative: match[5] + query + fragment,
   };
 };
-

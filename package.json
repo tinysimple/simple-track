@@ -11,7 +11,8 @@
     "build": "rollup -c",
     "publish": "pnpm run build && pnpm publish",
     "publish:ignore": "pnpm run build && pnpm publish --no-git-checks",
-    "test:dev": "vitest"
+    "test:dev": "vitest",
+    "lint": "eslint --fix ."
   },
   "files": [
     "dist"

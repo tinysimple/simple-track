@@ -148,10 +148,10 @@ describe('core -> options.ts', () => {
       data: 'SUNSHINE',
       handler: (ele: Node) => {
         return ele.nodeName;
-      }
+      },
     };
     options.set({
-      globalClickListeners: [globalWithHandlerListener]
+      globalClickListeners: [globalWithHandlerListener],
     });
     expect(options.getGlobalClickListeners()).toEqual([globalWithHandlerListener]);
   });

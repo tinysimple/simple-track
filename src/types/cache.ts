@@ -4,19 +4,19 @@ export const enum TransactionType {
 }
 
 export interface IStoreParameter {
-    name: string
-    params: IDBObjectStoreParameters
+  name: string;
+  params: IDBObjectStoreParameters;
 }
 
 export interface IDBOptions {
-    dbName: string
-    dbVersion: number
-    stores?: IStoreParameter[]
-    dbNamesuffix: string
+  dbName: string;
+  dbVersion: number;
+  stores?: IStoreParameter[];
+  dbNamesuffix: string;
 }
 
 export interface IStorageOptions {
-  storage?: Storage
-  suffix: string
-  version: number
+  storage?: Storage;
+  suffix: string;
+  version: number;
 }

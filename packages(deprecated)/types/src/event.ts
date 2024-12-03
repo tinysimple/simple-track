@@ -51,7 +51,7 @@ export const enum EventType {
   Click = 'click',
   HashChange = 'hash_change',
   Http = 'http',
-  Resource = 'resource'
+  Resource = 'resource',
 }
 
 export interface IEventParams {
@@ -114,5 +114,5 @@ export type IReportParams = IEventParams & ICommonReportParams;
 export interface IEventOptions {
   cacheType: CacheType;
   projectKey: string;
-  maxEvents: number
+  maxEvents: number;
 }

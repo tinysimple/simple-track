@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { defineConfig } from 'rollup'
+import { defineConfig } from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -119,6 +119,6 @@ const config = defineConfig([
     ],
     plugins: [dts()],
   },
-])
+]);
 // export default defineConfig(['core'].map(path => output(path)).flat());
 export default config;

@@ -1,4 +1,4 @@
-import { safeExecute } from './log'
+import { safeExecute } from './log';
 
 type EventHandler<T> = (data: T) => void;
 
@@ -10,7 +10,7 @@ export class EventEmitter<T = any> {
   }
 
   subscribe(eventName: string, handler: EventHandler<T>): void {
-    const target = this.eventHandlers.get(eventName)
+    const target = this.eventHandlers.get(eventName);
     if (target) {
       target.push(handler);
     } else {
@@ -34,9 +34,9 @@ export class EventEmitter<T = any> {
   emit(eventName: string, data?: T): void {
     if (this.eventHandlers.has(eventName)) {
       const handlers = this.eventHandlers.get(eventName)!;
-      handlers.forEach((handler) => safeExecute(() => handler(data!)));
+      handlers.forEach(handler => safeExecute(() => handler(data!)));
     }
   }
 }
 
-export default EventEmitter
+export default EventEmitter;

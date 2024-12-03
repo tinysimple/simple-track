@@ -1,2 +1,2 @@
-export * from './cache'
-export * from './replace'
+export * from './cache';
+export * from './replace';

@@ -1,8 +1,5 @@
 import type { IEventParams } from '../../../types';
-import {
-  TrackStorage,
-  TrackIndexedDB,
-} from '../../../utils';
+import { TrackStorage, TrackIndexedDB } from '../../../utils';
 import {
   DB_EVENT_STORE_NAME,
   DB_EVENT_STORE_PRIMARY_KEY,
@@ -20,5 +17,5 @@ export const storage = new TrackStorage({
 export const db = new TrackIndexedDB<IEventParams>({
   dbNamesuffix: DB_NAME_SUFFIX,
   dbVersion: DB_VERSION,
-  stores: [{ name: DB_EVENT_STORE_NAME, params: { keyPath: DB_EVENT_STORE_PRIMARY_KEY } }]
-})
+  stores: [{ name: DB_EVENT_STORE_NAME, params: { keyPath: DB_EVENT_STORE_PRIMARY_KEY } }],
+});

@@ -117,5 +117,5 @@ export type IReportParams = IEventParams & ICommonReportParams;
 export interface IEventOptions {
   cacheType: CacheType;
   projectKey: string;
-  maxEvents: number
+  maxEvents: number;
 }

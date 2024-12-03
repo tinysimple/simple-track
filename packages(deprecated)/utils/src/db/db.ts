@@ -1,24 +1,24 @@
 import { type IStoreParameter, type IDBOptions, TransactionType } from '@sunshine-track/types';
 
 export class TrackIndexedDB<T> {
-  private dbNamesuffix: string
+  private dbNamesuffix: string;
   private _dbName: string = '';
-  private dbName: string = ''
+  private dbName: string = '';
   private dbVersion: number;
   private db!: IDBDatabase;
   private stores: IStoreParameter[] = [];
 
   constructor(options: Pick<IDBOptions, 'dbNamesuffix' | 'stores' | 'dbVersion'>) {
-    const { dbVersion, dbNamesuffix, stores } = options
-    this.dbVersion = dbVersion
-    this.dbNamesuffix = dbNamesuffix
-    this.stores = stores || []
+    const { dbVersion, dbNamesuffix, stores } = options;
+    this.dbVersion = dbVersion;
+    this.dbNamesuffix = dbNamesuffix;
+    this.stores = stores || [];
   }
 
   init(options: Pick<IDBOptions, 'dbName'>): Promise<void> {
     const { dbName } = options;
     this._dbName = dbName;
-    this.dbName = `${this._dbName}${this.dbNamesuffix}`
+    this.dbName = `${this._dbName}${this.dbNamesuffix}`;
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.dbName, this.dbVersion);
 

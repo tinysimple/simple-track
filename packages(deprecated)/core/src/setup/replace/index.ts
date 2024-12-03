@@ -5,7 +5,7 @@ import options from '../../options';
 
 export const setupReplace = () => {
   const siwtchMap = options.getSwitchMap();
-  const globalClickListeners = options.getGlobalClickListeners()
+  const globalClickListeners = options.getGlobalClickListeners();
   globalClickListeners.length &&
     addListenOrReplace({
       type: EventType.Click,
