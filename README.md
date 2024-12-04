@@ -40,19 +40,19 @@
 
 ```js
 // npm
-npm i @simple/track
+npm i @littledust/track
 
 // yarn
-yarn add @simple/track
+yarn add @littledust/track
 
 // pnpm
-pnpm i @simple/track
+pnpm i @littledust/track
 ```
 
 ## 使用
 
 ```js
-import Track from '@simple/track'
+import Track from '@littledust/track'
 
 const options = {
   projectKey: 'test-project', // 项目的key
@@ -230,7 +230,7 @@ app.use(Track, {
 - 自定义指令上报：如果你是 Vue 项目，支持指令上报
 
 ```js
-import Track from '@simple/track'
+import Track from '@littledust/track'
 
 <button @click="addTrack">add</button>
 <button @click="reportTrack">report</button>
