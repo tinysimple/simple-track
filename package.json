@@ -64,5 +64,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:tinysimple/simple-track.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
