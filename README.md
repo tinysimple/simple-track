@@ -285,4 +285,5 @@ const reportTrack = () => {
 | ` switchs.whitescreen `   | 是否开启白屏检测上报 |  ` boolean ` |   ` false ` |
 | ` switchs.hashchange `   | 是否开启hash变化请求上报 |  ` boolean ` |   ` false ` |
 | ` switchs.history `   | 是否开启history变化上报 |  ` boolean ` |   ` false ` |
+| ` switchs.beforeunload `   | 是否开启页面卸载状态上报（同时会将还未上报的缓存数据一起上报） |  ` boolean ` |   ` true ` |
 | ` switchs.performance `   | 是否开启页面性能上报 |  ` boolean ` |   ` false ` |
