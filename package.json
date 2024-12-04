@@ -8,10 +8,11 @@
   "type": "module",
   "scripts": {
     "dev": "rollup -c -w",
-    "build": "pnpm run lint && rollup -c",
-    "publish": "pnpm run test:dev && pnpm run build && pnpm publish",
-    "publish:ignore": "pnpm run test:dev && pnpm run build && pnpm publish --no-git-checks",
+    "build": "pnpm run test && pnpm run lint && rollup -c",
+    "publish": "pnpm run test && pnpm run build && pnpm publish",
+    "publish:ignore": "pnpm run test && pnpm run build && pnpm publish --no-git-checks",
     "test:dev": "vitest",
+    "test": "vitest run",
     "lint": "eslint --fix ."
   },
   "files": [
