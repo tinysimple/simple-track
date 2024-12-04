@@ -7,6 +7,7 @@ import {
   htmlElementAsString,
   parseUrlToObj,
   unknownToString,
+  isObject,
 } from '../../utils';
 import { openWhiteScreen } from '../setup/whiteScreen';
 import options from '../options';
@@ -175,13 +176,16 @@ const EventCollection = {
     });
   },
   [EventType.Error]: (e: IErrorTarget) => {
-    const { target, error, message } = e;
+    const { target, error, message } = e || {};
     if (!target?.localName) {
-      const stackFrame = ErrorStackParser.parse(!target ? e : error)[0];
+      const stackFrame =
+        !target && !isObject(e)
+          ? { fileName: '', lineNumber: -1, columnNumber: -1 }
+          : ErrorStackParser.parse(!target ? e : error)[0];
       const { fileName, columnNumber: column, lineNumber: line } = stackFrame;
       const errorData = {
         type: EventType.Error,
-        message,
+        message: message ?? String(e),
         fileName,
         line,
         column,

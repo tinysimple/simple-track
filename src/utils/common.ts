@@ -67,3 +67,6 @@ export const parseUrlToObj = (url: string) => {
     relative: match[5] + query + fragment,
   };
 };
+
+export const isObject = (obj: any) =>
+  typeof obj === 'object' && obj && Object.prototype.toString.call(obj).slice(0, 7) === '[object';

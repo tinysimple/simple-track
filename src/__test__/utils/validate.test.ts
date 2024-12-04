@@ -8,6 +8,7 @@ import {
   validTypes,
 } from '../../utils/validate';
 import { PropType } from '../../types';
+import pck from '../../../package.json';
 
 describe('utils -> validate.ts', () => {
   test('isValidString', () => {
@@ -55,7 +56,7 @@ describe('utils -> validate.ts', () => {
           type: PropType.Phone,
         },
       ]),
-    ).toThrowError('[sunshine-track] options validate error: field2 is not of type phone');
+    ).toThrowError(`[${pck.name}] options validate error: field2 is not of type phone`);
   });
 
   test('unknownToString', () => {

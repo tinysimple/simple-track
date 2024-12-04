@@ -1,5 +1,11 @@
 ## 简介
 
+**本项目基于 [sunshine-track](https://github.com/sanxin-lin/sunshine-track) 仓库进行增加功能，bug修复等。本项目长期维护。**
+
+---
+---
+---
+
 ` sunshine-track ` 应用于前端监控，借鉴了 [web-see](https://github.com/xy-sea/web-see#) 的监控设计。` sunshine-track ` 基于 ` 行为上报 `，实现了 ` 用户行为、错误监控、页面跳转、页面白屏检测、页面性能检测 `等上报功能。适用于 ` Vue、React、Angular ` 等框架
 
 ## 功能
@@ -34,19 +40,19 @@
 
 ```js
 // npm
-npm i sunshine-track
+npm i @simple/track
 
 // yarn
-yarn add sunshine-track
+yarn add @simple/track
 
 // pnpm
-pnpm i sunshine-track
+pnpm i @simple/track
 ```
 
 ## 使用
 
 ```js
-import Track from 'sunshine-track'
+import Track from '@simple/track'
 
 const options = {
   projectKey: 'test-project', // 项目的key
@@ -224,7 +230,7 @@ app.use(Track, {
 - 自定义指令上报：如果你是 Vue 项目，支持指令上报
 
 ```js
-import Track from 'sunshine-track'
+import Track from '@simple/track'
 
 <button @click="addTrack">add</button>
 <button @click="reportTrack">report</button>

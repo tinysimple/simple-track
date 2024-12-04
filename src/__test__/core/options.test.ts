@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { INIT_OPTIONS, getInitOptions, Options } from '../../core/options';
+import pck from '../../../package.json';
 
 describe('core -> options.ts', () => {
   it('getInitOptions', () => {
@@ -25,7 +26,7 @@ describe('core -> options.ts', () => {
       options.set({
         projectKey: 123 as unknown as string,
       }),
-    ).toThrowError('[sunshine-track] options validate error: projectKey is not of type string');
+    ).toThrowError(`[${pck.name}] options validate error: projectKey is not of type string`);
     options.reset();
     expect(() =>
       options.set({
@@ -33,7 +34,7 @@ describe('core -> options.ts', () => {
           url: 'sunshine/report',
         },
       }),
-    ).toThrowError('[sunshine-track] options validate error: url is not of type dns');
+    ).toThrowError(`[${pck.name}] options validate error: url is not of type dns`);
   });
 
   it('Options get', () => {

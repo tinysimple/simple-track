@@ -1,4 +1,5 @@
-export const PACKAGES_NAME = 'sunshine-track';
+import pck from '../../package.json';
+export const PACKAGES_NAME = pck.name || 'track';
 
 export const DB_NAME_SUFFIX = '_track_db';
 export const DB_VERSION = 1;
