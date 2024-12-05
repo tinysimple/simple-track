@@ -57,6 +57,18 @@ export class EventTrack {
     }
   }
 
+  async getCachedData() {
+    const { cacheType, projectKey } = this;
+    switch (cacheType) {
+      case 'storage':
+        return storage.getItem<IEventParams[]>(projectKey) || [];
+      case 'db':
+        return (await db.getAll(DB_EVENT_STORE_NAME)) || [];
+      default:
+        return this.data;
+    }
+  }
+
   async clearReportData() {
     const { cacheType, projectKey } = this;
     switch (cacheType) {
@@ -78,7 +90,7 @@ export class EventTrack {
   }
 
   async reportAll(data: IEventParams[]) {
-    const list = this.data;
+    const list = await this.getCachedData();
     if (!data.length && !list.length) {
       return;
     }
