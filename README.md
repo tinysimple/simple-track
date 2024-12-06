@@ -301,8 +301,8 @@ const reportTrack = () => {
 | ` report.format `  | 上报数据格式化 |  ` function ` |   - |
 | ` report.customReport `  | 自定义上报 |  ` function ` |  - |
 | ` report.isReport `  | 自定义决定上不上报 |  ` function ` |  - |
-| ` report.enableLocalSave `  | 是否开启本地存储历史日志 |  ` function | boolean ` |  false |
-| ` report.saveDays `  | 本地存储历史日志最大天数（超过的日志将被清除） |  ` number ` |  7 |
+| ` report.enableLocalSave `  | 是否开启本地存储历史日志 |  ` function \| boolean ` |  `false` |
+| ` report.saveDays `  | 本地存储历史日志最大天数（超过的日志将被清除） |  ` number ` |  `7` |
 | ` cacheType `   | 数据缓存方式 |  ` normal、storage、db ` |   ` normal ` |
 | ` globalClickListeners `   | 上报状态 |  ` array ` |   - |
 | ` log `   | 当前域名 |  ` boolean ` |   ` false ` |
