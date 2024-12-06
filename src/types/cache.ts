@@ -20,3 +20,10 @@ export interface IStorageOptions {
   suffix: string;
   version: number;
 }
+
+export interface IStorageQueryRange {
+  lower?: any;
+  upper?: any;
+  lowerOpen?: boolean;
+  upperOpen?: boolean;
+}

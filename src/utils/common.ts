@@ -1,4 +1,5 @@
 import { _global } from './global';
+import { IStorageQueryRange } from '../types';
 
 // 获取当前时间戳
 export const getTimestamp = () => Date.now();
@@ -70,3 +71,18 @@ export const parseUrlToObj = (url: string) => {
 
 export const isObject = (obj: any) =>
   typeof obj === 'object' && obj && Object.prototype.toString.call(obj).slice(0, 7) === '[object';
+
+export const parseQueryToIDBKeyRange = (query: IStorageQueryRange) => {
+  const { lower, lowerOpen = false, upper, upperOpen = false } = query;
+  if (lower != null && upper != null) {
+    if (lower === upper && lowerOpen === upperOpen && !lowerOpen) {
+      return IDBKeyRange.only(lower);
+    }
+    return IDBKeyRange.bound(lower, upper, lowerOpen, upperOpen);
+  } else if (lower != null) {
+    return IDBKeyRange.lowerBound(lower, lowerOpen);
+  } else if (upper != null) {
+    return IDBKeyRange.upperBound(upper, upperOpen);
+  }
+  return null;
+};

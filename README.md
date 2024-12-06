@@ -169,7 +169,7 @@ app.use(Track, {
 })
 ```
 
-### 格式化上报数据、自定义决定上不上报、自定义上报
+### 格式化上报数据、自定义决定上不上报、自定义上报、自定义开启上报数据本地存储
 
 如果你想在数据上报之前，格式化上报数据的话，可以配置` report `中的` format `
 
@@ -219,6 +219,35 @@ app.use(Track, {
     }     
   }
 })
+```
+
+如果你想将上报的数据同时存储在本地，可以配置` report `中的` enableLocalSave `  
+同时可以控制本地数据的保存时间，默认为 7 天，超过 7 天的数据将被删除。配置` report `中的` saveDays `  
+该功能在有些场景下非常有用，比如：当不具备错误收集后台时，依然可以收集错误信息，并提供了方法来获取本地存储的数据。可以自己手动将数据导出为文件等。
+```js
+app.use(Track, {
+  ...options,
+  report: {
+    url: 'http://example.com/report',
+    reportType: 'img',
+    enableLocalSave: true,
+    saveDays: 7
+    //customReport: (data) => { // 自定义上报
+      // return;
+    //}  
+  }
+});
+
+// 获取本地存储的上报数据内容
+// IStorageQueryRange：{
+//   lower?: any; // 查询区间起始值（时间戳）
+//   upper?: any;  // 查询区间终止值（时间戳）
+//   lowerOpen?: boolean;  // 是否左开，为true则表示不包含lower值（默认为false）
+//   upperOpen?: boolean;  // 是否右开，为true则表示不包含upper值（默认为false）
+// }
+// count：获取的数量
+Track.getLocalRecord(query?: IStorageQueryRange, count?: number).then(res: [] => {}); // 根据条件查询数据
+Track.getLocalRecord().then(res: [] => {}); // 查全部数据
 ```
 
 ### 手动上报
@@ -272,6 +301,8 @@ const reportTrack = () => {
 | ` report.format `  | 上报数据格式化 |  ` function ` |   - |
 | ` report.customReport `  | 自定义上报 |  ` function ` |  - |
 | ` report.isReport `  | 自定义决定上不上报 |  ` function ` |  - |
+| ` report.enableLocalSave `  | 是否开启本地存储历史日志 |  ` function | boolean ` |  false |
+| ` report.saveDays `  | 本地存储历史日志最大天数（超过的日志将被清除） |  ` number ` |  7 |
 | ` cacheType `   | 数据缓存方式 |  ` normal、storage、db ` |   ` normal ` |
 | ` globalClickListeners `   | 上报状态 |  ` array ` |   - |
 | ` log `   | 当前域名 |  ` boolean ` |   ` false ` |

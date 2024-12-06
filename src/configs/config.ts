@@ -4,6 +4,7 @@ export const PACKAGES_NAME = pck.name || 'track';
 export const DB_NAME_SUFFIX = '_track_db';
 export const DB_VERSION = 1;
 export const DB_EVENT_STORE_NAME = 'event_store';
+export const DB_EVENT_LOCAL_STORE_NAME = 'local_' + DB_EVENT_STORE_NAME;
 export const DB_EVENT_STORE_PRIMARY_KEY = 'time';
 
 // export const STORAGE_KEY = 'track'

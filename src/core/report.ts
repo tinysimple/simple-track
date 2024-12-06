@@ -5,6 +5,7 @@ import {
   RequestMethod,
   IReportClassOptions,
   Callback,
+  IStorageQueryRange,
 } from '../types';
 import {
   __sunshine_track__,
@@ -15,8 +16,15 @@ import {
   Queue,
   log,
   isSupportFetch,
+  warning,
+  getTimestamp,
+  checkIsIndexedDBSupported,
+  parseQueryToIDBKeyRange,
 } from '../utils';
 import { isFunction, isArray } from 'lodash-es';
+import { db } from './setup/cache/cache';
+import { getDbStatus } from './setup/cache/index';
+import { DB_EVENT_LOCAL_STORE_NAME } from '../configs';
 
 export class Report {
   private queue = new Queue();
@@ -62,6 +70,22 @@ export class Report {
     };
   }
 
+  getEnableLocalSave() {
+    const { enableLocalSave } = this.options;
+    if (typeof enableLocalSave === 'function') {
+      return !!enableLocalSave();
+    }
+    return !!enableLocalSave;
+  }
+
+  getSaveDaysMills() {
+    let { saveDays = 7 } = this.options;
+    if (typeof saveDays !== 'number' || !saveDays || saveDays <= 0) {
+      saveDays = 7;
+    }
+    return saveDays * 24 * 60 * 60 * 1000;
+  }
+
   async send(data: IEventParams | IEventParams[], beforeSend?: Callback) {
     const currentData = isArray(data) ? data : [data];
 
@@ -86,6 +110,33 @@ export class Report {
 
     log('Report data：', result);
 
+    if (checkIsIndexedDBSupported() && this.getEnableLocalSave()) {
+      const dbInitPromise = getDbStatus();
+      if (dbInitPromise) {
+        dbInitPromise.then?.(() => {
+          try {
+            db.remove(
+              DB_EVENT_LOCAL_STORE_NAME,
+              IDBKeyRange.upperBound(getTimestamp() - this.getSaveDaysMills()),
+            ).catch(err => {
+              warning(err);
+            });
+            for (const item of currentData) {
+              const { data } = item || {};
+              if (Object.prototype.toString.call(data) === '[object PerformanceLongTaskTiming]') {
+                item.data = JSON.parse(JSON.stringify(item.data));
+              }
+              db.add(DB_EVENT_LOCAL_STORE_NAME, item).catch(err => {
+                warning(err);
+              });
+            }
+          } catch (err) {
+            warning('[set/remove report data into indexDB error]' + err);
+          }
+        });
+      }
+    }
+
     beforeSend?.();
 
     if (isFunction(customReport)) {
@@ -106,6 +157,22 @@ export class Report {
           break;
       }
     }
+  }
+
+  async getLocalRecord(query?: IStorageQueryRange, count?: number) {
+    const enableLocalSave = this.getEnableLocalSave();
+    if (!enableLocalSave) {
+      return null;
+    }
+    const queryRange = query && parseQueryToIDBKeyRange(query);
+    const searchParams = [];
+    if (queryRange) {
+      searchParams.push(queryRange);
+    }
+    if (count != undefined) {
+      searchParams.push(count);
+    }
+    return (await db.getAll(DB_EVENT_LOCAL_STORE_NAME, ...searchParams)) || [];
   }
 
   beaconReport(url: string, data: IReportParams[]): boolean {

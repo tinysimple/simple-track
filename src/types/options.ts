@@ -11,6 +11,8 @@ export interface IReportOptions {
   format?: (data: any[]) => any;
   customReport?: ICustomReport;
   isReport?: (data: any[]) => boolean;
+  enableLocalSave?: () => boolean | boolean;
+  saveDays?: number;
 }
 
 export type CacheType = 'normal' | 'storage' | 'db';

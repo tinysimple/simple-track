@@ -94,9 +94,7 @@ export class EventTrack {
     if (!data.length && !list.length) {
       return;
     }
-    const finalList = [...list, ...data];
-    await this.clearReportData();
-    report.send(finalList, () => this.clearReportData());
+    await this.report([...list, ...data]);
   }
 }
 

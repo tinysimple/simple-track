@@ -4,6 +4,8 @@ import { checkIsIndexedDBSupported, warning } from '../../../utils';
 import options from '../../options';
 import { db, storage } from './cache';
 
+let dbInitPromise: Promise<void> | null = null;
+
 const setupStorage = (projectKey: string) => {
   const v = storage.getItem(projectKey);
   if (!isArray(v)) {
@@ -16,9 +18,9 @@ const setupDB = async (projectKey: string) => {
     if (!checkIsIndexedDBSupported()) {
       throw new Error('IndexedDB is not supported in this browser.');
     }
-    await db.init({
+    await (dbInitPromise = db.init({
       dbName: projectKey,
-    });
+    }));
   } catch (e) {
     warning('db is close');
     // indexedDB 报错则关闭
@@ -39,6 +41,14 @@ export const setupCache = async (options: IOptions) => {
     default:
       break;
   }
+  // 启用本地存储，则使用 db
+  if (options?.report?.enableLocalSave && cacheType !== 'db') {
+    await setupDB(projectKey);
+  }
+};
+
+export const getDbStatus = () => {
+  return dbInitPromise;
 };
 
 export default setupCache;

@@ -1,4 +1,4 @@
-import { EventType, ICustomEventParams, StatusType } from '../types';
+import { EventType, ICustomEventParams, StatusType, IStorageQueryRange } from '../types';
 import { install, errorBoundary, init } from './init';
 import { default as reportData } from './report';
 import { getTimestamp } from '../utils';
@@ -30,6 +30,10 @@ const report = (params: ICustomEventParams) => {
   });
 };
 
+const getLocalRecord = (query?: IStorageQueryRange, count?: number) => {
+  return reportData.getLocalRecord(query, count);
+};
+
 const sunshineTrack = {
   install,
   errorBoundary,
@@ -37,6 +41,7 @@ const sunshineTrack = {
   // use,
   add,
   report,
+  getLocalRecord,
 };
 
 export default sunshineTrack;

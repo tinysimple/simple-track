@@ -91,10 +91,14 @@ export class TrackIndexedDB<T> {
     });
   }
 
-  getAll(storeName: string): Promise<T[] | undefined> {
+  getAll(
+    storeName: string,
+    query?: IDBValidKey | IDBKeyRange | null,
+    count?: number,
+  ): Promise<T[] | undefined> {
     return new Promise((resolve, reject) => {
       const objectStore = this.getObjectStore(storeName, TransactionType.Readonly);
-      const request = objectStore.getAll();
+      const request = objectStore.getAll(...[query, count]);
 
       request.onsuccess = (event: Event) => {
         const { result } = event.target as IDBRequest;
@@ -125,7 +129,7 @@ export class TrackIndexedDB<T> {
     });
   }
 
-  remove(storeName: string, primaryKey: string): Promise<void> {
+  remove(storeName: string, primaryKey: string | IDBKeyRange): Promise<void> {
     return new Promise((resolve, reject) => {
       const transaction = this.getTransaction(storeName, TransactionType.Readwrite);
       const objectStore = this.getObjectStore(storeName, TransactionType.Readwrite);

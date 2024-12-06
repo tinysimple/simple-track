@@ -7,6 +7,7 @@ import {
   DB_VERSION,
   STORAGE_KEY_SUFFIX,
   STORAGE_VERSION,
+  DB_EVENT_LOCAL_STORE_NAME,
 } from '../../../configs';
 
 export const storage = new TrackStorage({
@@ -17,5 +18,8 @@ export const storage = new TrackStorage({
 export const db = new TrackIndexedDB<IEventParams>({
   dbNamesuffix: DB_NAME_SUFFIX,
   dbVersion: DB_VERSION,
-  stores: [{ name: DB_EVENT_STORE_NAME, params: { keyPath: DB_EVENT_STORE_PRIMARY_KEY } }],
+  stores: [
+    { name: DB_EVENT_STORE_NAME, params: { keyPath: DB_EVENT_STORE_PRIMARY_KEY } },
+    { name: DB_EVENT_LOCAL_STORE_NAME, params: { keyPath: DB_EVENT_STORE_PRIMARY_KEY } },
+  ],
 });
